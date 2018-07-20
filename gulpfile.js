@@ -10,6 +10,27 @@ const sourcemaps = require('gulp-sourcemaps');
 const pump = require('pump');
 const notify = require("gulp-notify");
 const rename = require("gulp-rename");
+const del = require("del");
+
+
+gulp.task('delete-images', function() {
+  return del('./dist/images/**');
+});
+gulp.task('copy-images',['delete-images'], function() {
+  return gulp.src('./src/images/**/*')
+    .pipe(gulp.dest('./dist/images'))
+    .pipe(connect.reload());
+});
+
+gulp.task('delete-fonts', function() {
+  return del('./dist/css/fonts/**');
+});
+gulp.task('copy-fonts',['delete-fonts'], function() {
+  return gulp.src('./src/css/fonts/**/*')
+    .pipe(gulp.dest('./dist/css/fonts'))
+    .pipe(connect.reload());
+});
+
 
 gulp.task('pug', function buildHTML() {
   return gulp.src('./src/pug/*.pug')
@@ -90,6 +111,12 @@ gulp.task('watch', function () {
   });
   watch('./src/js/partials/*.js', function(){
     gulp.start('uglify');
+  });
+  watch('./src/images/**/*', function () {
+    gulp.start('copy-images');
+  });
+  watch('./src/fonts/**/*', function () {
+    gulp.start('copy-fonts');
   });
 });
 
