@@ -13,7 +13,7 @@ const rename = require("gulp-rename");
 
 gulp.task('pug', function buildHTML() {
   return gulp.src('./src/pug/*.pug')
-    .pipe(pug().on('error', notify.onError(function (error) {
+    .pipe(pug({ pretty: true }).on('error', notify.onError(function (error) {
       console.log(error.toString());
       return error.message;
     })))
