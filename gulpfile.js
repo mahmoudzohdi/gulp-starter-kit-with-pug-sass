@@ -78,7 +78,9 @@ gulp.task('uglify', ['concat'], function (cb) {
 
 gulp.task('watch', function () {
   watch('./src/scss/**/*.scss', function(){
-    gulp.start('sass');
+    setTimeout(function(){
+      gulp.start('sass');
+    }, 400)
   });
   watch('./src/pug/**/*.pug', function(){
     gulp.start('pug');
