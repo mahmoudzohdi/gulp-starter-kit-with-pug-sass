@@ -26,7 +26,7 @@ gulp.task('delete-fonts', function() {
   return del('./dist/css/fonts/**');
 });
 gulp.task('copy-fonts',['delete-fonts'], function() {
-  return gulp.src('./src/css/fonts/**/*')
+  return gulp.src('./src/fonts/**/*')
     .pipe(gulp.dest('./dist/css/fonts'))
     .pipe(connect.reload());
 });
