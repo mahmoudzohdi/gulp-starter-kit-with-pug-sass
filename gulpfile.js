@@ -13,24 +13,35 @@ const rename = require("gulp-rename");
 const del = require("del");
 
 
+
 gulp.task('delete-images', function() {
   return del('./dist/images/**');
 });
 gulp.task('copy-images',['delete-images'], function() {
-  return gulp.src('./src/images/**/*')
-    .pipe(gulp.dest('./dist/images'))
-    .pipe(connect.reload());
+  
+  return setTimeout(function(){
+      return gulp.src('./src/images/**/*')
+          .on('error', notify.onError(function (error) {
+            return error;
+          }))
+          .pipe(gulp.dest('./dist/images'))
+          .pipe(connect.reload());
+  }, 400);
 });
 
 gulp.task('delete-fonts', function() {
   return del('./dist/css/fonts/**');
 });
 gulp.task('copy-fonts',['delete-fonts'], function() {
-  return gulp.src('./src/fonts/**/*')
-    .pipe(gulp.dest('./dist/css/fonts'))
-    .pipe(connect.reload());
+  return setTimeout(function(){
+      return gulp.src('./src/fonts/**/*')
+          .on('error', notify.onError(function (error) {
+            return error;
+          }))
+          .pipe(gulp.dest('./dist/css/fonts'))
+          .pipe(connect.reload());
+  }, 400);
 });
-
 
 gulp.task('pug', function buildHTML() {
   return gulp.src('./src/pug/*.pug')
