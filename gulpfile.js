@@ -139,8 +139,6 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('default', ['connect', 'watch']);
-
 gulp.task('build', [
   'pug',
   'sass',
@@ -149,3 +147,5 @@ gulp.task('build', [
   'copy-images',
   'copy-fonts'
 ]);
+
+gulp.task('default', ['connect', 'build', 'watch']);
